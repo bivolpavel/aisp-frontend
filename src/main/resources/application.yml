@@ -1,0 +1,39 @@
+server:
+  port: 8088
+
+security:
+  basic:
+    enable: false
+  jwt:
+    uri: /auth/**
+    header: Authorization
+    prefix: Bearer
+    expiration: 86400
+    secret: JwtSecretKey
+
+spring:
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: /webjars/, classpath:/static/, classpath:/static/images
+
+logging:
+  level:
+    com.spf.psd2: DEBUG
+
+
+gateway:
+  host: http://localhost:8080
+
+
+authentication:
+  service:
+    host: http://localhost:8083
+    signInEndpoint: auth-service/signin
+    verifyCodeEndpoint: auth-service/verify
+    createUserEndpoint: auth-service/users
